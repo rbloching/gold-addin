@@ -34,7 +34,7 @@
       <HintPath>..\..\vendor\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="bsn.GoldParser">
-      <HintPath>..\..\vendor\bsn.GoldParser.dll</HintPath>
+      <HintPath>..\..\vendor\bsn\bsn.GoldParser.dll</HintPath>
     </Reference>
     <Reference Include="Mono.TextEditor">
       <HintPath>C:\Program Files %28x86%29\Xamarin Studio\bin\Mono.TextEditor.dll</HintPath>

@@ -56,7 +56,7 @@
       <Package>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.Refactoring\MonoDevelop.Refactoring.dll</Package>
     </Reference>
     <Reference Include="bsn.GoldParser">
-      <HintPath>..\..\..\vendor\bsn.GoldParser.dll</HintPath>
+      <HintPath>..\..\..\vendor\bsn\bsn.GoldParser.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
