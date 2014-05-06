@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>GOLD Grammar Project</_Name>		
+		<_Category>GOLD</_Category>
+		<Icon>md-project</Icon>
+		<LanguageName>GOLD</LanguageName>				
+		<_Description>Creates a new GOLD grammar project</_Description>				
+	</TemplateConfiguration>
+			
+             
+    <Combine name = "${ProjectName}" directory = ".">  
+        <Options>  
+            <StartupProject>${ProjectName}</StartupProject>  
+        </Options>  
+          
+        <Project name = "${ProjectName}" directory = "." type="GoldProject">  
+            <Options/>  
+            <Files>
+            	<File name="${ProjectName}.grm" AddStandardHeader="True">
+            		<![CDATA["Name"    = 'Your Language'
+"Version" ='1.0'
+"Author"  ='Your Name'
+"About"   ='Description of your language'
+
+"Auto Whitespace" = 'True'
+"Case Sensitive"  = 'True'
+"Start Symbol"    = <Start>                
+                ]]></File>            	
+            </Files>  
+        </Project>  
+    
+    </Combine> 
+
+</Template>
+

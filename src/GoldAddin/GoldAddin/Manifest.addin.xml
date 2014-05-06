@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Addin 
+	namespace="GoldAddin" 
+	id="GoldAddin" 
+	name="GoldAddin" 
+	author="Ryan Bloching" 
+	copyright="TBD" 
+	description="GOLD Parser Builder Language Binding" 
+	category="Language bindings" 
+	version="1.0">
+	
+	<Dependencies>
+		<Addin id="::MonoDevelop.Core" version="4.0" />
+		<Addin id="::MonoDevelop.Ide" version="4.0" />
+		<Addin id="::MonoDevelop.SourceEditor2" version="4.0" />		
+		<Addin id="::MonoDevelop.Refactoring" version="4.0" />
+	</Dependencies>
+	
+	<Extension path="/MonoDevelop/Core/MimeTypes">
+    	<MimeType id="text/x-gold" _description="GOLD Grammar File" icon="" isText="true">
+      	<File pattern="*.grm"/>
+    	</MimeType>
+  	</Extension>
+
+  	<Extension path = "/MonoDevelop/Ide/FileFilters">
+    	<FileFilter
+			id="goldFileFilter"
+			insertbefore = "AllFiles"
+			_label="GOLD Files"
+			extensions = "*.grm"/>
+  	</Extension>
+  	
+  	<Extension path="/MonoDevelop/ProjectModel/LanguageBindings">
+    	<LanguageBinding
+			id="GOLD"
+			supportedextensions=".grm"
+			class="GoldAddin.GoldLanguageBinding"/>
+  	</Extension>
+  	
+  	<Extension path="/MonoDevelop/SourceEditor2/SyntaxModes">
+		<Templates resource="GoldAddin.Resources.templates.GoldSyntaxMode.xml" />
+	</Extension>						
+	
+	<Extension path="/MonoDevelop/ProjectModel/ProjectBindings">
+		<ProjectBinding id="goldProject" class="GoldAddin.GoldProjectBinding"/>
+	</Extension>
+
+	<Extension path="/MonoDevelop/Ide/ProjectTemplates">
+		<ProjectTemplate id="goldProjectTemplate" resource="GoldAddin.Resources.templates.GoldGrammarProject.xpt.xml"/>
+	</Extension>
+	
+	<Extension path="/MonoDevelop/Ide/FileTemplates">
+		<FileTemplate id="EmptyGoldFile" resource="GoldAddin.Resources.templates.EmptyGrammarFile.xft.xml"/>
+	</Extension>																							
+	
+	<Extension path="/MonoDevelop/Core/StockIcons">    	
+  		<StockIcon stockid="goldPropertyIcon" resource="GoldAddin.Resources.icons.property.png"/>
+		<StockIcon stockid="goldTerminalIcon" resource="GoldAddin.Resources.icons.terminal.png"/>
+		<StockIcon stockid="goldNonTerminalIcon" resource="GoldAddin.Resources.icons.nonterminal.png"/>
+		<StockIcon stockid="goldSetIcon" resource="GoldAddin.Resources.icons.set.png"/>
+  	</Extension>
+  	
+  	<!--must register project as serializable in order for XS to load an existing GOLD project -->
+	<Extension path="/MonoDevelop/ProjectModel/SerializableClasses">
+    	<DataType class="GoldAddin.GoldProject" />
+    	<DataType class="GoldAddin.GoldProjectConfiguration"/>
+  	</Extension>
+  	
+  	
+	<Extension path="/MonoDevelop/ProjectModel/Gui/ItemOptionPanels/Build">
+		<Condition id="ItemType" value="GoldAddin.GoldProject">			
+			<Section 
+					id="goldOutputPanel" 
+					_label="Output" 
+					icon="md-command"											 
+					class="GoldAddin.GoldOutputOptionsPanel"/>			
+		</Condition>
+	</Extension>
+			
+	
+	<Extension path="/MonoDevelop/ProjectModel/ExtendedProperties">
+		<ItemProperty class="MonoDevelop.Projects.Project"
+			name="GoldAddin.OutputFormat"
+			type="GoldAddin.GrammarTableFormat"/>
+		<ItemProperty class="MonoDevelop.Projects.Project"
+			name="GoldAddin.GrammarTableName"
+			type="System.String"/>
+	</Extension>  											
+
+	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
+		<Class fileExtensions=".grm" class="GoldAddin.GoldCompletionExtension" />
+		<Class fileExtensions=".grm" class="GoldAddin.GoldRenameExtension" />
+	</Extension>  	  											  											  											  	  											  											  											
+	
+	<Extension path="/MonoDevelop/SourceEditor2/ContextMenu/Editor">
+		<Condition id="FileType" fileExtensions=".grm">
+			<CommandItem
+				id="MonoDevelop.Ide.Commands.EditCommands.Rename"
+				insertbefore="MonoDevelop.SourceEditor.SourceEditorCommands.MarkerOperations"
+			/>
+		</Condition>
+	</Extension>								
+
+	<Extension path="/MonoDevelop/TypeSystem/Parser">
+		<Parser mimeType="text/x-gold" class="GoldAddin.GrammarTypeSystemParser" />
+	</Extension>
+																													
+	<Runtime>
+	</Runtime>
+</Addin>

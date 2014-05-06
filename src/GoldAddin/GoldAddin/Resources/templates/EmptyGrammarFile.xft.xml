@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Template Language="GOLD">
+	<TemplateConfiguration>		
+		<_Name>GOLD Grammar File</_Name>		
+		<Icon>md-text-file</Icon>
+		<_Description>Creates an empty GOLD grammar file</_Description>				
+		<_Category>GOLD</_Category>											
+	</TemplateConfiguration>
+	     
+     <TemplateFiles>
+     	<File DefaultExtension=".grm" DefaultName="language" AddStandardHeader="True"/>
+     </TemplateFiles> 
+
+	<FileOptions></FileOptions>
+
+</Template>
+

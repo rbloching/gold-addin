@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{84B0A0F7-E6C3-4E6F-99EC-DF03C7D40076}</ProjectGuid>
+    <ProjectTypeGuids>{7DBEB09D-BB9F-4D92-A141-A009135475EF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GoldAddin</RootNamespace>
+    <AssemblyName>GoldAddin</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="MonoDevelop.Core">
+      <Package>C:\Program Files (x86)\Xamarin Studio\bin\MonoDevelop.Core.dll</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.Ide">
+      <Package>C:\Program Files (x86)\Xamarin Studio\bin\MonoDevelop.Ide.dll</Package>
+    </Reference>
+    <Reference Include="Mono.TextEditor">
+      <Package>C:\Program Files (x86)\Xamarin Studio\bin\Mono.TextEditor.dll</Package>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <Package>C:\Program Files (x86)\Xamarin Studio\bin\ICSharpCode.NRefactory.dll</Package>
+    </Reference>
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral">
+      <Package>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.Refactoring\MonoDevelop.Refactoring.dll</Package>
+    </Reference>
+    <Reference Include="bsn.GoldParser">
+      <HintPath>..\..\..\vendor\bsn.GoldParser.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="gtk-gui\GoldAddin.OutputOptionsWidget.cs" />
+    <Compile Include="Project\GoldProject.cs" />
+    <Compile Include="Project\GoldProjectBinding.cs" />
+    <Compile Include="Project\GoldProjectConfiguration.cs" />
+    <Compile Include="Compiler\GoldCompiler.cs" />
+    <Compile Include="Compiler\ICompiler.cs" />
+    <Compile Include="Gui\OutputOptionsWidget.cs" />
+    <Compile Include="Gui\GoldOutputOptionsPanel.cs" />
+    <Compile Include="Compiler\GrammarParser.cs" />
+    <Compile Include="Compiler\GoldBuildOutputParser.cs" />
+    <Compile Include="Compiler\CompilerMessage.cs" />
+    <Compile Include="Compiler\GoldGrammarTable.cs" />
+    <Compile Include="Parser\GrammarTypeSystemParser.cs" />
+    <Compile Include="Parser\GrammarTokenizer.cs" />
+    <Compile Include="Parser\TokenUtil.cs" />
+    <Compile Include="Project\GoldLanguageBinding.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Parser\DefinitionNode.cs" />
+    <Compile Include="Parser\NonTerminalDefinition.cs" />
+    <Compile Include="Parser\PropertyDefinition.cs" />
+    <Compile Include="Parser\SetDefinition.cs" />
+    <Compile Include="Parser\TerminalDefinition.cs" />
+    <Compile Include="Completion\CompletionProvider.builtins.cs" />
+    <Compile Include="Completion\CompletionProvider.cs" />
+    <Compile Include="Refactoring\RenameProvider.cs" />
+    <Compile Include="Refactoring\GoldRenameExtension.cs" />
+    <Compile Include="Completion\GoldCompletionExtension.cs" />
+    <Compile Include="Utils\AnyCaseStringSet.cs" />
+    <Compile Include="Utils\GrammarText.cs" />
+    <Compile Include="Compiler\IParser.cs" />
+    <Compile Include="Parser\GoldParsedDocument.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\templates\GoldGrammarProject.xpt.xml" />
+    <EmbeddedResource Include="Resources\templates\GoldSyntaxMode.xml" />
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GOLD Meta-Language %282.6.0%29.egt" />
+    <EmbeddedResource Include="Resources\templates\EmptyGrammarFile.xft.xml" />
+    <EmbeddedResource Include="Resources\icons\nonterminal.png" />
+    <EmbeddedResource Include="Resources\icons\property.png" />
+    <EmbeddedResource Include="Resources\icons\set.png">
+      <DependentUpon>terminal.png</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icons\terminal.png" />
+    <EmbeddedResource Include="Manifest.addin.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Gui\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Project\" />
+    <Folder Include="Compiler\" />
+    <Folder Include="Parser\" />
+    <Folder Include="Completion\" />
+    <Folder Include="Refactoring\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+</Project>

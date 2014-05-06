@@ -1,0 +1,52 @@
+<SyntaxMode name="GOLD" mimeTypes="text/x-gold">
+       
+  <!-- block comments -->      
+  <Span color="Comment(Block)" rule="CommentRule" stopateol="false">
+  	<Begin>!*</Begin>
+  	<End>*!</End>
+  </Span> 	  
+  
+  <!-- line comments -->      
+  <Span color="Comment(Line)" stopateol="true">
+  	<Begin>!</Begin>
+  </Span>
+  
+  <!-- grammar properties -->
+  <Span color="Preprocessor" stopateol="true">
+  	<Begin>"</Begin>
+  	<End>"</End>
+  </Span>
+  
+  <!-- non-terminals -->      
+  <Span color="User Types" stopateol="true">
+  	<Begin>&lt;</Begin>
+  	<End>&gt;</End>
+  </Span>
+  
+  <!-- literal terminals -->
+  <Span color="String" stopateol="true">
+  	<Begin>'</Begin>
+  	<End>'</End>
+  </Span>
+  
+              
+  <!-- defined character sets -->
+  <Span color="Keyword(Type)" stopateol="true">  
+  	<Begin>{</Begin>
+  	<End>}</End>
+  </Span>
+           
+  <!-- literal character sets -->  
+  <!-- for most Xamarin themes, this will show up as plain text.
+  the ide does not support syntax styling per language. -->
+  <Span color="User Field Usage" stopateol="true" escape="']'">  
+  	<Begin>[</Begin>
+  	<End>]</End>
+  </Span>
+  
+  <!-- comment block highlights embedded spans differently unless a rule is defined -->
+  <Rule name="CommentRule">
+  </Rule>
+  
+</SyntaxMode>
+
