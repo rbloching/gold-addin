@@ -102,6 +102,19 @@ namespace GoldAddin
 				string name = getTokenTextForDuplicateMessage (type, descr);
 				return getLocationOfReDefinition (name);
 			}
+			
+			//handle DFA error where multiple terminals can accept the same text
+			//this particular error actually has four fields:
+			// TYPE:DESCRIPTION:TERMINAL-LIST:DETAILS
+			if (type.Contains("DFA") && descr.Contains ("Cannot distinguish between"))
+			{
+				//this error will contain a space seperated list of terminals
+				//use the first terminal from the list for location info				
+				string terminals = fields[2];
+				string firstTerminal = terminals.Split(new char[]{' '},StringSplitOptions.RemoveEmptyEntries)[0];
+				return getLocationOfDefinition(firstTerminal);
+			}
+			
 
 			return new LineInfo (0, 0, 0);
 		}
@@ -149,7 +162,7 @@ namespace GoldAddin
 
 			return getTokenText (problemType, description);
 		}
-			
+					
 
 		//name is already delimited. ie: {set name}, <non terminal>, ...
 		// the location of the first matching token is returned
