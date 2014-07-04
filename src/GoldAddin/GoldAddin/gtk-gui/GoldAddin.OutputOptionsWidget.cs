@@ -5,9 +5,13 @@ namespace GoldAddin
 	public partial class OutputOptionsWidget
 	{
 		private global::Gtk.Table table1;
+		
 		private global::Gtk.Label label1;
+		
 		private global::Gtk.Label label2;
+		
 		private global::Gtk.ComboBox outputFormatSelector;
+		
 		private global::Gtk.Entry outputTableName;
 
 		protected virtual void Build ()

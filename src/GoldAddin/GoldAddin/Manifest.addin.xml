@@ -4,14 +4,14 @@
 	id="GoldAddin" 
 	name="GoldAddin" 
 	author="Ryan Bloching" 
-	copyright="TBD" 
+	copyright="MIT" 
 	description="GOLD Parser Builder Language Binding" 
 	category="Language bindings" 
 	version="1.0">
 	
 	<Dependencies>
-		<Addin id="::MonoDevelop.Core" version="4.0" />
-		<Addin id="::MonoDevelop.Ide" version="4.0" />
+		<Addin id="::MonoDevelop.Core" version="5.0" />
+		<Addin id="::MonoDevelop.Ide" version="5.0" />
 		<Addin id="::MonoDevelop.SourceEditor2" version="4.0" />		
 		<Addin id="::MonoDevelop.Refactoring" version="4.0" />
 	</Dependencies>
@@ -42,7 +42,7 @@
 	</Extension>						
 	
 	<Extension path="/MonoDevelop/ProjectModel/ProjectBindings">
-		<ProjectBinding id="goldProject" class="GoldAddin.GoldProjectBinding"/>
+		<ProjectBinding id="GoldProject" class="GoldAddin.GoldProjectBinding"/>
 	</Extension>
 
 	<Extension path="/MonoDevelop/Ide/ProjectTemplates">

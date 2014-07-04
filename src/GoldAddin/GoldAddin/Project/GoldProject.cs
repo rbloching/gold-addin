@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using MonoDevelop.Core;
@@ -14,7 +16,8 @@ namespace GoldAddin
 		ICompiler goldCompiler;
 		BuildResult currentBuildResult;
 		IProgressMonitor monitor; 
-						   
+		List<string> projectTypes;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GoldAddin.GoldProject"/> class.
 		/// </summary>
@@ -47,23 +50,36 @@ namespace GoldAddin
 
 		void init ()
 		{
+			projectTypes = new List<string> ();
+			projectTypes.Add (GoldLanguageBinding.LanguageName);
+
 			goldCompiler = new GoldCompiler ();
-			goldCompiler.MessageOutput += compileOutputHandler;
+			goldCompiler.MessageOutput += compilerOutputHandler;
 			currentBuildResult = new BuildResult ();
 		}
+
 
         /// <summary>
         /// Gets the project type
         /// </summary>        
+		[Obsolete]
 		public override string ProjectType 
 		{            
 			get { return GoldLanguageBinding.LanguageName; }
 		}
 
+		/// <summary>
+		/// Gets the project type and its base types.
+		/// </summary>
+		public override IEnumerable<string> GetProjectTypes ()
+		{
+			return projectTypes;
+		}
+
 		protected override BuildResult DoBuild (IProgressMonitor monitor, ConfigurationSelector configuration)
 		{
             currentBuildResult.ClearErrors();            
-			GoldProjectConfiguration config = (GoldProjectConfiguration)(GetConfiguration (configuration));
+			var config = (GoldProjectConfiguration)(GetConfiguration (configuration));
 
 			//check the number of grammar files in the project set to compile
 			//a gold project can have only a single grammar file set to compile
@@ -77,6 +93,7 @@ namespace GoldAddin
 					file = projectFile;
 				}
 			}
+
 			if (grmFileCount == 0)
 			{
 				currentBuildResult.AddWarning ("Nothing to build: there is no grammar file associated with this project with the build action set to compile");
@@ -99,7 +116,7 @@ namespace GoldAddin
 		{
 			base.DoClean (monitor, configuration);
 
-			GoldProjectConfiguration config = (GoldProjectConfiguration)(GetConfiguration (configuration));
+			var config = (GoldProjectConfiguration)(GetConfiguration (configuration));
 			foreach (ProjectFile file in Files)
 			{
 				if (IsCompileable (file.Name))
@@ -119,7 +136,7 @@ namespace GoldAddin
 		}
 
 		//true if the given file is a grammar file that is set to compile build action
-		bool isGrammarWithCompileAction(ProjectFile file)
+		static bool isGrammarWithCompileAction(ProjectFile file)
 		{
 			if (file == null)
 				return false;
@@ -144,7 +161,7 @@ namespace GoldAddin
 			goldCompiler.Compile (inputFile, outputFile);
 		}
 
-		string getOutputFileName(GoldProjectConfiguration config)
+		static string getOutputFileName(GoldProjectConfiguration config)
 		{
 			string extension = "cgt";
 			if (config.OutputFormat == GrammarTableFormat.EnhancedGrammarTable)
@@ -153,7 +170,7 @@ namespace GoldAddin
 		}
 	
 
-        void compileOutputHandler(CompilerMessage message)
+        void compilerOutputHandler(CompilerMessage message)
         {
             //write to Build Output Window
 			if (message.RawText.Length > 0)
@@ -178,11 +195,11 @@ namespace GoldAddin
 			//so the default build action is none, unless there are no other
 			// .grm files set to compile
 
-			string result = BuildAction.None.ToString ();
+			string result = BuildAction.None;
 			if (GoldLanguageBinding.IsSourceFile (fileName))
 			{
 				if (countOfGrammarFiles () == 0)
-					result = BuildAction.Compile.ToString ();
+					result = BuildAction.Compile;
 			}
 			return result;
 		}

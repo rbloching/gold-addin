@@ -8,7 +8,7 @@ The GOLD meta-language binding makes it possible to edit, compile, and (someday)
 
 Building Project
 ----------------
-Use Xamarin Studio 4.2 (or later) to build the project. Addin Maker add-in should be installed (this can be done from the Add-in Manager of the IDE).
+Use Xamarin Studio 5.0 (or later) to build the project. The Addin Maker plugin should be installed (this can be done from the Add-in Manager of the IDE).
 
 
 Installation
